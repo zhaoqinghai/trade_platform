@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="AccentLightBrush" Color="{DynamicResource Accent100}" />
+    <SolidColorBrush x:Key="AccentLightForegroundBrush" Color="{DynamicResource Accent100Foreground}" />
+    <SolidColorBrush x:Key="AccentMidBrush" Color="{DynamicResource Accent400}" />
+    <SolidColorBrush x:Key="AccentMidForegroundBrush" Color="{DynamicResource Accent400Foreground}" />
+    <SolidColorBrush x:Key="AccentDarkBrush" Color="{DynamicResource Accent700}" />
+    <SolidColorBrush x:Key="AccentDarkForegroundBrush" Color="{DynamicResource Accent700Foreground}" />
+</ResourceDictionary>

@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="ValidationErrorBrush" Color="#f44336"/>
+
+    <SolidColorBrush x:Key="Background" Color="#FF000000"  />
+    <SolidColorBrush x:Key="Paper" Color="#FF303030"  />
+    <SolidColorBrush x:Key="CardBackground" Color="#FF424242"  />
+    <SolidColorBrush x:Key="ToolBarBackground" Color="#FF212121"  />
+    <SolidColorBrush x:Key="Body" Color="#DDFFFFFF"  />
+    <SolidColorBrush x:Key="BodyLight" Color="#89FFFFFF"  />
+    <SolidColorBrush x:Key="ColumnHeader" Color="#BCFFFFFF"  />
+    <!-- 74% -->
+
+    <SolidColorBrush x:Key="CheckBoxOff" Color="#89FFFFFF"  />
+    <SolidColorBrush x:Key="CheckBoxDisabled" Color="#FF647076"  />
+
+    <SolidColorBrush x:Key="TextBoxBorder" Color="#89FFFFFF"  />
+    <SolidColorBrush x:Key="Divider" Color="#1FFFFFFF"  />
+    <!-- 12% -->
+    <SolidColorBrush x:Key="Selection" Color="#757575"  />
+
+    <SolidColorBrush x:Key="FlatButtonClick" Color="#19757575"  />
+    <!-- 25% -->
+    <SolidColorBrush x:Key="FlatButtonRipple" Color="#FFB6B6B6"  />
+
+    <SolidColorBrush x:Key="ToolTipBackground" Color="#eeeeee"  />
+    <SolidColorBrush x:Key="ChipBackground" Color="#FF2E3C43"  />
+    <SolidColorBrush x:Key="SnackbarBackground" Color="#FFCDCDCD"  />
+    <SolidColorBrush x:Key="SnackbarMouseOver" Color="#FFB9B9BD"  />
+    <SolidColorBrush x:Key="SnackbarRipple" Color="#FF494949"  />
+
+    <SolidColorBrush x:Key="TextFieldBoxBackground" Color="#1AFFFFFF"  />
+    <!-- 10% white -->
+    <SolidColorBrush x:Key="TextFieldBoxDisabledBackground" Color="#0DFFFFFF"  />
+    <!-- 5% white -->
+    <SolidColorBrush x:Key="TextAreaBorder" Color="#BCFFFFFF"  />
+    <!-- 74% white -->
+    <SolidColorBrush x:Key="TextAreaInactiveBorder" Color="#1AFFFFFF"  />
+    <!-- 10% white -->
+</ResourceDictionary>

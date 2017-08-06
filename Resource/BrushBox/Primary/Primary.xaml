@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="PrimaryLightBrush" Color="{DynamicResource Primary200}" />
+    <SolidColorBrush x:Key="PrimaryLightForegroundBrush" Color="{DynamicResource Primary200Foreground}"/>
+    <SolidColorBrush x:Key="PrimaryMidBrush" Color="{DynamicResource Primary500}" />
+    <SolidColorBrush x:Key="PrimaryMidForegroundBrush" Color="{DynamicResource Primary500Foreground}" />
+    <SolidColorBrush x:Key="PrimaryDarkBrush" Color="{DynamicResource Primary700}" />
+    <SolidColorBrush x:Key="PrimaryDarkForegroundBrush" Color="{DynamicResource Primary700Foreground}" />
+</ResourceDictionary>
