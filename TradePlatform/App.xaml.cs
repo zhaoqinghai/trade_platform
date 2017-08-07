@@ -18,6 +18,7 @@ namespace TradePlatform
         {
             base.OnStartup(e);
             ThemeSelector.Default.SetDefaultTheme(ThemeType.Amber);
+            ThemeSelector.Default.SetDefaultTheme(false);
         }
     }
 }

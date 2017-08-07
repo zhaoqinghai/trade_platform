@@ -22,7 +22,7 @@ namespace Resource
 
         }
 
-        public ThemeProvider(Assembly assembly)
+        private ThemeProvider(Assembly assembly)
         {
             var assemblyName = assembly.GetName().Name;
             var dictionaryEntries = GetAllAssemblyResources(assembly);

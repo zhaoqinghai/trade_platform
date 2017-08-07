@@ -1,9 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="ValidationErrorBrush" Color="#f44336"/>
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options" >
+    
+    <SolidColorBrush x:Key="ValidationErrorBrush" Color="#f44336" />
 
-    <SolidColorBrush x:Key="Background" Color="#FF000000"  />
-    <SolidColorBrush x:Key="Paper" Color="#FF303030"  />
+    <SolidColorBrush x:Key="Background"  Color="{DynamicResource DarkBackgroundColor}" />
+    <SolidColorBrush x:Key="Paper" Color="#FF303030" />
     <SolidColorBrush x:Key="CardBackground" Color="#FF424242"  />
     <SolidColorBrush x:Key="ToolBarBackground" Color="#FF212121"  />
     <SolidColorBrush x:Key="Body" Color="#DDFFFFFF"  />

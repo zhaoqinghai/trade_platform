@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid Background="{DynamicResource Background}">
-        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18" Foreground="{DynamicResource AccentDarkForegroundBrush}">Hello world</TextBlock>
-        <Button Background="{DynamicResource PrimaryDarkBrush}" Padding="30 6" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click" Content="123">
-            
-        </Button>
+        <TextBlock Foreground="{DynamicResource SnackbarBackground}" Text="Hello World" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
+        <ToggleButton Foreground="{DynamicResource AccentDarkForegroundBrush}"  VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click" >
+            <Grid Background="{DynamicResource PrimaryDarkBrush}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <TextBlock Margin="30 6" Text="Hello world"></TextBlock>
+            </Grid>
+        </ToggleButton>
         <CheckBox Click="RadioButton_Checked" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 80 0 0"></CheckBox>
     </Grid>
 </Window>

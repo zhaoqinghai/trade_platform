@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -26,25 +27,18 @@ namespace TradePlatform
             InitializeComponent();
 
         }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var type = ThemeType.Purple;
-            while (true)
+            var btn = sender as ToggleButton;
+            if ((bool)btn.IsChecked)
             {
-                if(type == ThemeType.Purple)
-                {
-                    type = ThemeType.Amber;
-                    ThemeSelector.Default.SetCurrentTheme(ThemeType.Amber);
-                }
-                else
-                {
-                    type = ThemeType.Purple;
-                    ThemeSelector.Default.SetCurrentTheme(ThemeType.Purple);
-                }
-                await Task.Delay(2000);
+                ThemeSelector.Default.SetCurrentTheme(ThemeType.Purple);
             }
-            
+            else
+            {
+                ThemeSelector.Default.SetCurrentTheme(ThemeType.Amber);
+            }
+
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)

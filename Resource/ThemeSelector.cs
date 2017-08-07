@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -13,11 +15,15 @@ namespace Resource
 {
     public class ThemeSelector
     {
+        bool _currentIsDark;
+
         ThemeProvider _themeProvider;
 
         static ThemeSelector _themeSelector;
 
         ThemeType _currentTheme;
+
+        private ConcurrentDictionary<DarkLightTheme, ResourceDictionary> _dictResource;
 
         public static ThemeSelector Default
         {
@@ -29,20 +35,47 @@ namespace Resource
         }
         public void SetCurrentTheme(bool isDark)
         {
+            if (isDark == _currentIsDark)
+                return;
+            
+            _currentIsDark = isDark;
             var existingResourceDictionary = Application.Current.Resources.MergedDictionaries
-               .Where(rd => rd.Source != null)
-               .Where(rd => Regex.Match(rd.Source.OriginalString, @"(\/Resource;component\/BrushBox\/(DarkTheme)|(LightTheme))").Success).ToList();
-
-            if (existingResourceDictionary.Any())
-            {
-                foreach (var item in existingResourceDictionary)
+            .Where(rd => rd.Source != null)
+            .Where(rd => Regex.Match(rd.Source.OriginalString, @"(\/Resource;component\/BrushBox\/(DarkTheme)|(LightTheme))").Success).ToList().FirstOrDefault();
+           
+            var type = _currentIsDark ? DarkLightTheme.Dark : DarkLightTheme.Light;
+            var replaceDiction = _dictResource.GetOrAdd(type,
+                new ResourceDictionary()
                 {
-                    Application.Current.Resources.MergedDictionaries.Remove(item);
+                    Source =
+                        new Uri(
+                            $"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/DarkTheme.xaml")
+                });
+
+            if (replaceDiction != null && existingResourceDictionary != null)
+                foreach (var item in existingResourceDictionary.Keys)
+                {
+                    var extingBrush = existingResourceDictionary[item] as SolidColorBrush;
+                    var replaceBrush = replaceDiction[item] as SolidColorBrush;
+                    if(extingBrush == null || replaceBrush == null)
+                        continue;
+                    if (extingBrush.IsFrozen)
+                    {
+                        existingResourceDictionary[item] = replaceBrush;
+                        continue;
+                    }
+                    var animation = new ColorAnimation
+                    {
+                        From = extingBrush.Color,
+                        To = replaceBrush.Color,
+                        Duration = new Duration(TimeSpan.FromMilliseconds(300))
+                    };
+                    //existingResourceDictionary[item] = replaceBrush;
+                    extingBrush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
                 }
-            }
-            var accentSource = isDark ? $"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/DarkTheme.xaml" : $"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/LightTheme.xaml";
-            var accentSourceDictionary = new ResourceDictionary() { Source = new Uri(accentSource) };
-            Application.Current.Resources.MergedDictionaries.Add(accentSourceDictionary);
+
+
+            
         }
 
         public void SetDefaultTheme(bool isDark)
@@ -50,7 +83,7 @@ namespace Resource
             var existingResourceDictionary = Application.Current.Resources.MergedDictionaries
                .Where(rd => rd.Source != null)
                .Where(rd => Regex.Match(rd.Source.OriginalString, @"(\/Resource;component\/BrushBox\/(DarkTheme)|(LightTheme))").Success).ToList();
-
+            _currentIsDark = isDark;
             if (existingResourceDictionary.Any())
             {
                 foreach (var item in existingResourceDictionary)
@@ -61,14 +94,22 @@ namespace Resource
             var accentSource = isDark ?  $"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/DarkTheme.xaml" : $"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/LightTheme.xaml";
             var accentSourceDictionary = new ResourceDictionary() { Source = new Uri(accentSource) };
             Application.Current.Resources.MergedDictionaries.Add(accentSourceDictionary);
+
+            var darkColors = new ResourceDictionary(){Source = new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/DarkAnimationColors.xaml") };
+            Application.Current.Resources.MergedDictionaries.Add(darkColors);
+
+            var lightColors = new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/LightAnimationColors.xaml") };
+            Application.Current.Resources.MergedDictionaries.Add(lightColors);
+
+
         }
 
-        public ThemeSelector() : this(assmbly:Assembly.GetExecutingAssembly())
+        private ThemeSelector() : this(assmbly:Assembly.GetExecutingAssembly())
         {
 
         }
 
-        public ThemeSelector(Assembly assmbly)
+        private ThemeSelector(Assembly assmbly)
         {
             var assmblyName = assmbly.GetName().Name;
 
@@ -90,12 +131,16 @@ namespace Resource
             var primarySource = $"pack://application:,,,/{assmblyName};component/BrushBox/Primary/Primary.xaml";
             var primarySourceDictionary = new ResourceDictionary() { Source = new Uri(primarySource) };
             Application.Current.Resources.MergedDictionaries.Add(primarySourceDictionary);
-
-            //SetCurrentTheme(ThemeType.Amber);
+            Task.Run(() =>
+            {
+                _dictResource = new ConcurrentDictionary<DarkLightTheme, ResourceDictionary>();
+                _dictResource.GetOrAdd(DarkLightTheme.Dark, new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/DarkTheme.xaml")});
+                _dictResource.GetOrAdd(DarkLightTheme.Light, new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/LightTheme.xaml") });
+               
+            });
 
         }
-
-       //private void SetEntry(string entryName,)
+        
 
         /// <summary>
         /// 可以在配置文件进行设置
@@ -269,6 +314,13 @@ namespace Resource
         Amber,
         Purple
     }
+
+    public enum DarkLightTheme
+    {
+        Dark,
+        Light
+    }
+
     public enum AccentBrushes
     {
         AccentLightBrush,
