@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Shared="False" x:Key="PrimaryLightBrush" />
-    <SolidColorBrush x:Shared="False" x:Key="PrimaryLightForegroundBrush" />
-    <SolidColorBrush x:Shared="False" x:Key="PrimaryMidBrush" />
-    <SolidColorBrush x:Shared="False" x:Key="PrimaryMidForegroundBrush" />
-    <SolidColorBrush x:Shared="False" x:Key="PrimaryDarkBrush" />
-    <SolidColorBrush x:Shared="False" x:Key="PrimaryDarkForegroundBrush" />
+    <SolidColorBrush x:Key="PrimaryLightBrush" />
+    <SolidColorBrush x:Key="PrimaryLightForegroundBrush" />
+    <SolidColorBrush x:Key="PrimaryMidBrush" />
+    <SolidColorBrush x:Key="PrimaryMidForegroundBrush" />
+    <SolidColorBrush x:Key="PrimaryDarkBrush" />
+    <SolidColorBrush x:Key="PrimaryDarkForegroundBrush" />
 </ResourceDictionary>
