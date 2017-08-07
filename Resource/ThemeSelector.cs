@@ -113,29 +113,12 @@ namespace Resource
         {
             var assmblyName = assmbly.GetName().Name;
 
-            var existingResourceDictionary = Application.Current.Resources.MergedDictionaries
-               .Where(rd => rd.Source != null)
-               .Where(rd => Regex.Match(rd.Source.OriginalString, @"(\/Resource;component\/BrushBox\/(Accent)|(Primary))").Success).ToList();
-            if (existingResourceDictionary.Any())
-            {
-                foreach(var item in existingResourceDictionary)
-                {
-                    Application.Current.Resources.MergedDictionaries.Remove(item);
-                }
-            }
-
-            var accentSource = $"pack://application:,,,/{assmblyName};component/BrushBox/Accent/Accent.xaml";
-            var accentSourceDictionary = new ResourceDictionary() { Source = new Uri(accentSource) };
-            Application.Current.Resources.MergedDictionaries.Add(accentSourceDictionary);
-
-            var primarySource = $"pack://application:,,,/{assmblyName};component/BrushBox/Primary/Primary.xaml";
-            var primarySourceDictionary = new ResourceDictionary() { Source = new Uri(primarySource) };
-            Application.Current.Resources.MergedDictionaries.Add(primarySourceDictionary);
+           
             Task.Run(() =>
             {
                 _dictResource = new ConcurrentDictionary<DarkLightTheme, ResourceDictionary>();
-                _dictResource.GetOrAdd(DarkLightTheme.Dark, new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/DarkTheme.xaml")});
-                _dictResource.GetOrAdd(DarkLightTheme.Light, new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/LightTheme.xaml") });
+                _dictResource.GetOrAdd(DarkLightTheme.Dark, new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{assmblyName};component/BrushBox/DarkTheme.xaml")});
+                _dictResource.GetOrAdd(DarkLightTheme.Light, new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{assmblyName};component/BrushBox/LightTheme.xaml") });
                
             });
 
@@ -147,23 +130,30 @@ namespace Resource
         /// </summary>
         public void SetDefaultTheme(ThemeType type)
         {
-            _currentTheme = type;
 
             _themeProvider = _themeProvider ?? new ThemeProvider();
 
-            var themeColor = _themeProvider.ThemeColors[type.ToString().ToLower()];
+            var existingResourceDictionary = Application.Current.Resources.MergedDictionaries
+              .Where(rd => rd.Source != null)
+              .Where(rd => Regex.Match(rd.Source.OriginalString, @"(\/Resource;component\/BrushBox\/(Accent)|(Primary))").Success).ToList();
+            if (existingResourceDictionary.Any())
+            {
+                foreach (var item in existingResourceDictionary)
+                {
+                    Application.Current.Resources.MergedDictionaries.Remove(item);
+                }
+            }
 
-            var parentDictionary = Application.Current.Resources;
-
-            var primarySource = $"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/ColorBox/{Enum.GetName(typeof(ThemeType),type)}_primary.xaml";
-            var primarySourceDictionary = new ResourceDictionary() { Source = new Uri(primarySource) };
-
-            Application.Current.Resources.MergedDictionaries.Add(primarySourceDictionary);
-
-            var accentSource = $"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/ColorBox/{Enum.GetName(typeof(ThemeType), type)}_accent.xaml";
+            var accentSource = $"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/Accent/Accent.xaml";
             var accentSourceDictionary = new ResourceDictionary() { Source = new Uri(accentSource) };
-
             Application.Current.Resources.MergedDictionaries.Add(accentSourceDictionary);
+
+            var primarySource = $"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/BrushBox/Primary/Primary.xaml";
+            var primarySourceDictionary = new ResourceDictionary() { Source = new Uri(primarySource) };
+            Application.Current.Resources.MergedDictionaries.Add(primarySourceDictionary);
+            _currentTheme = (ThemeType) (Enum.GetValues(typeof(ThemeType)).Length - (int) type);
+            SetCurrentTheme(type);
+            _currentTheme = type;
         }
 
         public void SetCurrentTheme(ThemeType type)
@@ -180,131 +170,71 @@ namespace Resource
 
                 foreach (var item in Enum.GetNames(typeof(AccentBrushes)))
                 {
-                    var brush = parentDictionary[item] as SolidColorBrush;
-
+                    if (!(parentDictionary[item] is SolidColorBrush))
+                        continue;
                     if (item.StartsWith("AccentLight"))
                     {
-                        var animation = new ColorAnimation
-                        {
-                            From = brush.Color,
-                            To = SetBrushColor(0,item),
-                            Duration = new Duration(TimeSpan.FromMilliseconds(300))
-                        };
-                        brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                        parentDictionary[item] = SetBrushColor(0, item);
                         continue;
                     }
 
                     if (item.StartsWith("AccentMid"))
                     {
-                        var animation = new ColorAnimation
-                        {
-                            From = brush.Color,
-                            To = SetBrushColor(2,item),
-                            Duration = new Duration(TimeSpan.FromMilliseconds(300))
-                        };
-                        brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                        parentDictionary[item] = SetBrushColor(2, item);
                         continue;
                     }
 
                     if (item.StartsWith("AccentDark"))
                     {
-                        var animation = new ColorAnimation
-                        {
-                            From = brush.Color,
-                            To = SetBrushColor(3, item),
-                            Duration = new Duration(TimeSpan.FromMilliseconds(300))
-                        };
-                        brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
-                        continue;
+                        parentDictionary[item] = SetBrushColor(3, item);
                     }
 
-                    Color SetBrushColor(int index, string name)
+                    SolidColorBrush SetBrushColor(int index, string name)
                     {
                         if (item.Contains("Foreground"))
                         {
-                            return themeColor.AccentColors.ToArray()[index].ForeColor;
+                            return new SolidColorBrush(themeColor.AccentColors.ToArray()[index].ForeColor); 
                         }
                         else
                         {
-                            return themeColor.AccentColors.ToArray()[index].BackColor;
+                            return new SolidColorBrush(themeColor.AccentColors.ToArray()[index].BackColor);
                         }
                     }
                 }
 
                 foreach (var item in Enum.GetNames(typeof(PrimaryBrushes)))
                 {
-                    var brush = parentDictionary[item] as SolidColorBrush;
-
+                    if (!(parentDictionary[item] is SolidColorBrush))
+                        continue;
                     if (item.StartsWith("PrimaryLight"))
                     {
-                        var animation = new ColorAnimation
-                        {
-                            From = brush.Color,
-                            To = SetBrushColor(0, item),
-                            Duration = new Duration(TimeSpan.FromMilliseconds(300))
-                        };
-                        brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                        parentDictionary[item] = SetBrushColor(0, item);
                         continue;
                     }
 
                     if (item.StartsWith("PrimaryMid"))
                     {
-                        var animation = new ColorAnimation
-                        {
-                            From = brush.Color,
-                            To = SetBrushColor(4, item),
-                            Duration = new Duration(TimeSpan.FromMilliseconds(300))
-                        };
-                        brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                        parentDictionary[item] = SetBrushColor(4, item);
                         continue;
                     }
 
                     if (item.StartsWith("PrimaryDark"))
                     {
-                        var animation = new ColorAnimation
-                        {
-                            From = brush.Color,
-                            To = SetBrushColor(8, item),
-                            Duration = new Duration(TimeSpan.FromMilliseconds(300))
-                        };
-                        brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
-                        continue;
+                        parentDictionary[item] = SetBrushColor(8, item);
                     }
 
-                    Color SetBrushColor(int index, string name)
+                    SolidColorBrush SetBrushColor(int index, string name)
                     {
-                        if (name.Contains("Foreground"))
+                        if (item.Contains("Foreground"))
                         {
-                            return themeColor.PrimaryColors.ToArray()[index].ForeColor;
+                            return new SolidColorBrush(themeColor.PrimaryColors.ToArray()[index].ForeColor);
                         }
                         else
                         {
-                            return themeColor.PrimaryColors.ToArray()[index].BackColor;
+                            return new SolidColorBrush(themeColor.PrimaryColors.ToArray()[index].BackColor);
                         }
                     }
                 }
-
-                var existingResourceDictionary = Application.Current.Resources.MergedDictionaries
-              .Where(rd => rd.Source != null)
-              .Where(rd => Regex.Match(rd.Source.OriginalString, @"(\/Resource;component\/ColorBox\/([a-z]+)_(accent)|(primary))").Success).ToList();
-
-                if (existingResourceDictionary.Any())
-                {
-                    foreach (var item in existingResourceDictionary)
-                    {
-                        Application.Current.Resources.MergedDictionaries.Remove(item);
-                    }
-                }
-
-                var primarySource = $"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/ColorBox/{Enum.GetName(typeof(ThemeType), type)}_primary.xaml";
-                var primarySourceDictionary = new ResourceDictionary() { Source = new Uri(primarySource) };
-
-                Application.Current.Resources.MergedDictionaries.Add(primarySourceDictionary);
-
-                var accentSource = $"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/ColorBox/{Enum.GetName(typeof(ThemeType), type)}_accent.xaml";
-                var accentSourceDictionary = new ResourceDictionary() { Source = new Uri(primarySource) };
-
-                Application.Current.Resources.MergedDictionaries.Add(accentSourceDictionary);
             }
         }
     }
