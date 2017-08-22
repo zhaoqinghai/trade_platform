@@ -1,18 +1,20 @@
-﻿<Window x:Class="TradePlatform.MainWindow"
+﻿<Controls:MetroWindow x:Class="TradePlatform.MainWindow"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradePlatform"
         mc:Ignorable="d"
+        Background="{DynamicResource WindowBackground}"
+        WindowTitleBrush="{DynamicResource AccentDarkBrush}"
+        TitleForeground="{DynamicResource AccentDarkForegroundBrush}"
         Title="MainWindow" Height="350" Width="525">
-    <Grid Background="{DynamicResource Background}">
+    <Grid >
         <TextBlock Foreground="{DynamicResource SnackbarBackground}" Text="Hello World" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
-        <ToggleButton Foreground="{DynamicResource AccentDarkForegroundBrush}"  VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click" >
-            <Grid Background="{DynamicResource PrimaryDarkBrush}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <TextBlock Margin="30 6" Text="Hello world"></TextBlock>
-            </Grid>
+        <ToggleButton Background="{DynamicResource PrimaryDarkBrush}" Foreground="{DynamicResource AccentDarkForegroundBrush}"  VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click" >
+            hello world
         </ToggleButton>
         <CheckBox Click="RadioButton_Checked" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 80 0 0"></CheckBox>
     </Grid>
-</Window>
+</Controls:MetroWindow>
