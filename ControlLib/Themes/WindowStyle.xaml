@@ -7,6 +7,9 @@
     <Style x:Key="CommonWindowStyle" BasedOn="{StaticResource {x:Type Controls:MetroWindow}}" TargetType="{x:Type Controls:MetroWindow}" >
         <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
         <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="EnableDWMDropShadow" Value="True"/>
+        <Setter Property="GlowBrush" Value="{DynamicResource PrimaryMidBrush}"/>
+        <Setter Property="NonActiveGlowBrush" Value="DarkGray"/>
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Foreground" Value="{DynamicResource WindowForeground}" />
         <Setter Property="NonActiveBorderBrush" Value="DarkGray" />
