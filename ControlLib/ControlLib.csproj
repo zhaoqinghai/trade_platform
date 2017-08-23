@@ -54,13 +54,28 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Assists\ButtonProgressAssist.cs" />
+    <Compile Include="Assists\RippleAssist.cs" />
+    <Compile Include="Assists\ShadowAssist.cs" />
+    <Compile Include="Controls\Ripple.cs" />
+    <Compile Include="Converters\MathConverter.cs" />
+    <Compile Include="Converters\RangeLengthConverter.cs" />
+    <Compile Include="Converters\ShadowConverter.cs" />
     <Compile Include="CustomControl1.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\Ripple.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\WindowButtonCommandsStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +108,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Behaviors\" />
+    <Folder Include="Common\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

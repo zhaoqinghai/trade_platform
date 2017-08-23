@@ -14,5 +14,7 @@
             hello world
         </ToggleButton>
         <CheckBox Click="RadioButton_Checked" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 80 0 0"></CheckBox>
+
+        <Button Margin="0 0 0 10" Style="{StaticResource NormalButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Center">Hello World!</Button>
     </Grid>
 </Controls:MetroWindow>
