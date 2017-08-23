@@ -6,9 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradePlatform"
         mc:Ignorable="d"
-        Background="{DynamicResource WindowBackground}"
-        WindowTitleBrush="{DynamicResource AccentDarkBrush}"
-        TitleForeground="{DynamicResource AccentDarkForegroundBrush}"
+        Style="{StaticResource CommonWindowStyle}"
         Title="MainWindow" Height="350" Width="525">
     <Grid >
         <TextBlock Foreground="{DynamicResource SnackbarBackground}" Text="Hello World" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>

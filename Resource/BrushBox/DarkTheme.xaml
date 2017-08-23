@@ -5,8 +5,12 @@
     <SolidColorBrush x:Key="ValidationErrorBrush" Color="#f44336" />
 
     <SolidColorBrush x:Key="WindowMaskBrush" Color="#eeeeee"/>
-    
+    <SolidColorBrush x:Key="WindowButtonCommandsBrush" Color="#33ffffff"/>
+    <SolidColorBrush x:Key="WindowForeground" Color="{DynamicResource DarkForegroundColor}" />
     <SolidColorBrush x:Key="WindowBackground"  Color="{DynamicResource DarkBackgroundColor}" />
+    <SolidColorBrush x:Key="WindowTitleBrush"  Color="{DynamicResource DarkTitleBackgroundColor}" />
+
+
     <SolidColorBrush x:Key="Paper" Color="#FF303030" />
     <SolidColorBrush x:Key="CardBackground" Color="#FF424242"  />
     <SolidColorBrush x:Key="ToolBarBackground" Color="#FF212121"  />

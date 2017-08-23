@@ -101,6 +101,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ControlLib\ControlLib.csproj">
+      <Project>{0cc98eb9-a233-4501-bb36-b44ef336942f}</Project>
+      <Name>ControlLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Resource\Resource.csproj">
       <Project>{b8462e1b-485c-45b0-9950-dd58cdc36f0c}</Project>
       <Name>Resource</Name>
