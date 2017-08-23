@@ -6,7 +6,7 @@
 
 ## 界面大概样式
 
-![主界面](./markdown/主页面.png)
+![主界面](./markdown/主页面.gif)
 
 ```csharp
 // checkbox 主要控制整体的风格（黑色主题，白色主题切换）
