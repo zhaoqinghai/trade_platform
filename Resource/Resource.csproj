@@ -47,6 +47,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Icons\ObservableDictionary.cs" />
+    <Compile Include="Icons\PackIcon.cs" />
+    <Compile Include="Icons\PackIconBase.cs" />
+    <Compile Include="Icons\PackIconDataFactory.cs" />
+    <Compile Include="Icons\PackIconKind.cs" />
+    <Compile Include="Icons\PackIconState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
