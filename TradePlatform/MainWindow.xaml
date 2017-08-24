@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:assist="clr-namespace:ControlLib.Assists;assembly=ControlLib"
         xmlns:local="clr-namespace:TradePlatform"
         mc:Ignorable="d"
         Style="{StaticResource CommonWindowStyle}"
@@ -14,7 +15,11 @@
             hello world
         </ToggleButton>
         <CheckBox Click="RadioButton_Checked" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 80 0 0"></CheckBox>
-
-        <Button Margin="0 0 0 10" Style="{StaticResource NormalButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Center">Hello World!</Button>
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal" Height="60">
+            <Button assist:ButtonProgressAssist.IndicatorBackground="Green" assist:ButtonProgressAssist.Maximum="100" assist:ButtonProgressAssist.Minimum="0" Style="{StaticResource ProcessButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Click="Button_Click_1">DownLoad</Button>
+            <Grid Width="20"></Grid>
+            <Button Style="{StaticResource NormalButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" >Hello World!</Button>
+        </StackPanel>
+        
     </Grid>
 </Controls:MetroWindow>

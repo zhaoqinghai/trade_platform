@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using ControlLib.Assists;
+using MahApps.Metro.Controls;
 using Resource;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,19 @@ namespace TradePlatform
             {
                 ThemeSelector.Default.SetCurrentTheme(false);
             }
+        }
+
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var value = 0;
+            while (value < 100)
+            {
+                ButtonProgressAssist.SetValue(sender as DependencyObject, value);
+                await Task.Delay(30);
+                value++;
+            }
+            await Task.Delay(100);
+            ButtonProgressAssist.SetValue(sender as DependencyObject, 0);
         }
     }
 }

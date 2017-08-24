@@ -56,7 +56,65 @@
                                         </MultiBinding>
                                     </Border.Effect>
                                 </Border>
-                                <Border HorizontalAlignment="Left" Background="{DynamicResource WindowBackground}" Opacity=".4">
+                           </Grid>
+                        </AdornerDecorator>
+                        <controls:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"     
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Padding="{TemplateBinding Padding}" 
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="border" Property="assist:ShadowAssist.Darken" Value="True" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="border" Property="assist:ShadowAssist.Darken" Value="True" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.23"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ProcessButtonStyle" TargetType="{x:Type ButtonBase}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryMidBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryMidBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryMidForegroundBrush}"/>
+        <Setter Property="assist:RippleAssist.Feedback" Value="{DynamicResource WindowMaskBrush}" />
+        <Setter Property="assist:ShadowAssist.ShadowEdges" Value="All" />
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="assist:ShadowAssist.ShadowDepth" Value="Depth1" />
+        <Setter Property="TextBlock.FontWeight" Value="Medium"/>
+        <Setter Property="TextBlock.FontSize" Value="14"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="16 4 16 4"/>
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Grid>
+                        <AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(assist:ShadowAssist.CacheMode)}">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}" CornerRadius="2"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"                                    
+                                        x:Name="border"
+                                         >
+                                    <Border.Effect>
+                                        <MultiBinding Converter="{x:Static converters:ShadowConverter.Instance}">
+                                            <Binding Path="(assist:ShadowAssist.ShadowDepth)" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            <Binding Path="(assist:ShadowAssist.ShadowEdges)" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        </MultiBinding>
+                                    </Border.Effect>
+                                </Border>
+                                <Border HorizontalAlignment="Left" Background="{Binding RelativeSource={RelativeSource TemplatedParent},Path=(assist:ButtonProgressAssist.IndicatorBackground)}" Opacity=".4">
                                     <Border.Width>
                                         <MultiBinding Converter="{StaticResource RangeLengthConverter}">
                                             <Binding Path="(assist:ButtonProgressAssist.Minimum)" RelativeSource="{RelativeSource TemplatedParent}" />
@@ -68,7 +126,7 @@
                                 </Border>
                             </Grid>
                         </AdornerDecorator>
-                        <controls:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"     
+                        <ContentControl Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"     
                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                     Padding="{TemplateBinding Padding}" 
