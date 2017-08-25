@@ -35,9 +35,8 @@
                                 </TransformGroup>
                             </Grid.RenderTransform>
                             <Viewbox Margin="{TemplateBinding Padding}">
-                                <Path Fill="{TemplateBinding Foreground}"
+                                <Path x:Name="PART_PATH" Fill="{TemplateBinding Foreground}"
                                       Stretch="Uniform"
-                                      Data="{Binding Data, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={converter:NullToUnsetValueConverter}}"
                                       SnapsToDevicePixels="False"
                                       UseLayoutRounding="False">
                                     <Path.LayoutTransform>

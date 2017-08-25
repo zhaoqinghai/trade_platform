@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 
 namespace Resource.Icons
 {
@@ -33,9 +34,10 @@ namespace Resource.Icons
         /// </summary>
         Both
     }
-
+    [TemplatePart(Name = TemlatePath,Type = typeof(Path))]
     public class PackIcon : Control
     {
+        public const string TemlatePath = "PART_PATH";
         static PackIcon()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PackIcon), new FrameworkPropertyMetadata(typeof(PackIcon)));
@@ -52,6 +54,11 @@ namespace Resource.Icons
             {
                 this.StopSpinAnimation();
                 this.BeginSpinAnimation();
+            }
+            var path = GetTemplateChild(TemlatePath) as Path;
+            if(path != null)
+            {
+                path.Data = Geometry.Parse(Data);
             }
         }
 
@@ -338,11 +345,9 @@ namespace Resource.Icons
 
         void SetCurrentDict(PackIconState state)
         {
-            CurrentDict = PackIconDataFactory.DataFactoryDict[state];
             OnApplyTemplate();
         }
-
-        private IDictionary<PackIconKind, string> CurrentDict = new Dictionary<PackIconKind,string>();
+        
 
         /// <summary>
         /// Gets or sets the icon to display.
@@ -371,7 +376,7 @@ namespace Resource.Icons
         internal void UpdateData(PackIconKind kind)
         {
             string data = null;
-            if(CurrentDict.TryGetValue(kind,out data))
+            if(PackIconDataFactory.DataFactoryDict[State].TryGetValue(kind,out data))
                 Data = data;
             Data = data;
         }

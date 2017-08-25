@@ -9,7 +9,11 @@ namespace Resource.Icons
 {
     public enum PackIconState
     {
-        [Description("Traditional")] Traditional,
+        [Description("Entypo")] Entypo,
         [Description("Modern")] Modern,
+        [Description("Awesome")] Awesome,
+        [Description("Light")] Light,
+        [Description("Material")] Material,
+        [Description("Octicons")] Octicons,
     }
 }

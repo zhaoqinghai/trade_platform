@@ -10,20 +10,270 @@
         xmlns:local="clr-namespace:TradePlatform"
         mc:Ignorable="d"
         Style="{StaticResource CommonWindowStyle}"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid >
-        <TextBlock Foreground="{DynamicResource SnackbarBackground}" Text="Hello World" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
-        <ToggleButton Background="{DynamicResource PrimaryDarkBrush}" Foreground="{DynamicResource AccentDarkForegroundBrush}"  VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click" >
-            hello world
-        </ToggleButton>
-        <CheckBox Click="RadioButton_Checked" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 80 0 0"></CheckBox>
-        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal" Height="60">
-            <Button assist:ButtonProgressAssist.IndicatorBackground="Green" assist:ButtonProgressAssist.Maximum="100" assist:ButtonProgressAssist.Minimum="0" Style="{StaticResource ProcessButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Click="Button_Click_1">DownLoad</Button>
-            <Grid Width="20"></Grid>
-            <Button Style="{StaticResource NormalButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Click="Button_Click_2" >
-                <packIcons:PackIcon Spin="True" Flip="Vertical" SpinDuration="1" Rotation="180" x:Name="icon" State="Modern" Kind="Clock"></packIcons:PackIcon>
-            </Button>
-        </StackPanel>
-        
-    </Grid>
+        Title="MainWindow" Height="500" Width="900">
+    <TabControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <TabItem DataContext="{x:Null}" Header="grid">
+            <Grid >
+                <TextBlock Foreground="{DynamicResource SnackbarBackground}" Text="Hello World" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
+                <ToggleButton Background="{DynamicResource PrimaryDarkBrush}" Foreground="{DynamicResource AccentDarkForegroundBrush}"  VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click" >
+                    hello world
+                </ToggleButton>
+                <CheckBox Click="RadioButton_Checked" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 80 0 0"></CheckBox>
+                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal" Height="60">
+                    <Button assist:ButtonProgressAssist.IndicatorBackground="Green" assist:ButtonProgressAssist.Maximum="100" assist:ButtonProgressAssist.Minimum="0" Style="{StaticResource ProcessButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Click="Button_Click_1">DownLoad</Button>
+                    <Grid Width="20"></Grid>
+                    <Button Style="{StaticResource NormalButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Click="Button_Click_2" >
+                        <packIcons:PackIcon Flip="Vertical" x:Name="icon" State="Modern" Kind="Clock"></packIcons:PackIcon>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="EntypoTabItem" Header="Entypo">
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding EntypoList}" >   
+                <!--<ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>-->
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Width="40" Height="40" Background="Transparent" >
+                                        <ContentPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>                            
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="40" Width="40" >
+                            <Grid Background="Transparent" ToolTip="{Binding Path=KindText}">
+                                <packIcons:PackIcon Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Flip="Vertical" State="Entypo" Kind="{Binding Path=DataPath}"></packIcons:PackIcon>
+                            </Grid>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Purple"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="LightGreen"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </TabItem>
+        <TabItem Header="Modern">
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding ModernList}" >   
+                <!--<ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>-->
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Width="40" Height="40" Background="Transparent" >
+                                        <ContentPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="40" Width="40" >
+                            <Grid Background="Transparent" ToolTip="{Binding Path=KindText}">
+                                <packIcons:PackIcon Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Flip="Vertical" State="Modern" Kind="{Binding Path=DataPath}"></packIcons:PackIcon>
+                            </Grid>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Purple"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="LightGreen"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </TabItem>
+        <TabItem Header="Awesome">
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding AwesomeList}" >   
+                <!--<ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>-->
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Width="40" Height="40" Background="Transparent" >
+                                        <ContentPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="40" Width="40" >
+                            <Grid Background="Transparent" ToolTip="{Binding Path=KindText}">
+                                <packIcons:PackIcon Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Flip="Vertical" State="Awesome" Kind="{Binding Path=DataPath}"></packIcons:PackIcon>
+                            </Grid>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Purple"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="LightGreen"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </TabItem>
+        <TabItem Header="Material">
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding MaterialList}" >   
+                <!--<ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>-->
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Width="40" Height="40" Background="Transparent" >
+                                        <ContentPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="40" Width="40" >
+                            <Grid Background="Transparent" ToolTip="{Binding Path=KindText}">
+                                <packIcons:PackIcon Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Flip="Vertical" State="Material" Kind="{Binding Path=DataPath}"></packIcons:PackIcon>
+                            </Grid>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Purple"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="LightGreen"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </TabItem>
+        <TabItem Header="Light">
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding LightList}" >   
+                <!--<ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>-->
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Width="40" Height="40" Background="Transparent" >
+                                        <ContentPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="40" Width="40" >
+                            <Grid Background="Transparent" ToolTip="{Binding Path=KindText}">
+                                <packIcons:PackIcon Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Flip="Vertical" State="Light" Kind="{Binding Path=DataPath}"></packIcons:PackIcon>
+                            </Grid>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Purple"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="LightGreen"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </TabItem>
+        <TabItem Header="Octicons">
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding OcticonsList}" >   
+                <!--<ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>-->
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Width="40" Height="40" Background="Transparent" >
+                                        <ContentPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="40" Width="40" >
+                            <Grid Background="Transparent" ToolTip="{Binding Path=KindText}">
+                                <packIcons:PackIcon Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Flip="Vertical" State="Octicons" Kind="{Binding Path=DataPath}"></packIcons:PackIcon>
+                            </Grid>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="Purple"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="LightGreen"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </TabItem>
+    </TabControl>
 </Controls:MetroWindow>

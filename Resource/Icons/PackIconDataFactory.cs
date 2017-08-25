@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,8 +13,6 @@ namespace Resource.Icons
     {
         public static Dictionary<PackIconState, Dictionary<PackIconKind, string>> DataFactoryDict;
 
-        public static Dictionary<PackIconKind, string> DefaultCurrent;
-
         public static void GetIconDatas()
         {
             string json = string.Empty;
@@ -22,12 +21,15 @@ namespace Resource.Icons
                 json = sr.ReadToEnd();
             }
             DataFactoryDict = JsonConvert.DeserializeObject<Dictionary<PackIconState, Dictionary<PackIconKind, string>>>(json);
-            DefaultCurrent = DataFactoryDict[default(PackIconState)];
-        }
 
-        public static void SetCurrenDict(PackIconState state)
-        {
-            DefaultCurrent = DataFactoryDict[state];
+            long size;
+            using (Stream s = new MemoryStream())
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(s, DataFactoryDict);
+                size = s.Length;
+            }
+
         }
     }
 }
