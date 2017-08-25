@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -47,9 +50,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\FlipToScaleXValueConverter.cs" />
+    <Compile Include="Converters\MarkupConverter.cs" />
+    <Compile Include="Converters\NullToUnsetValueConverter.cs" />
     <Compile Include="Icons\ObservableDictionary.cs" />
     <Compile Include="Icons\PackIcon.cs" />
-    <Compile Include="Icons\PackIconBase.cs" />
     <Compile Include="Icons\PackIconDataFactory.cs" />
     <Compile Include="Icons\PackIconKind.cs" />
     <Compile Include="Icons\PackIconState.cs" />
@@ -66,6 +71,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Startup.cs" />
     <Compile Include="ThemeColor.cs" />
     <Compile Include="ThemeProvider.cs" />
     <Compile Include="ThemeSelector.cs" />
@@ -74,6 +80,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Icons\IconPath.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -119,6 +129,10 @@
     <Page Include="ColorBox\Purple_primary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup />

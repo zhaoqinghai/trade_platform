@@ -17,8 +17,7 @@ namespace TradePlatform
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            ThemeSelector.Default.SetDefaultTheme(ThemeType.Amber);
-            ThemeSelector.Default.SetDefaultTheme(false);
+            Resource.Startup.Init();
         }
     }
 }

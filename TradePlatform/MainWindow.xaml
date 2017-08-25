@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:packIcons="clr-namespace:Resource.Icons;assembly=Resource"
         ResizeMode="CanResizeWithGrip"
         xmlns:assist="clr-namespace:ControlLib.Assists;assembly=ControlLib"
         xmlns:local="clr-namespace:TradePlatform"
@@ -19,7 +20,9 @@
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal" Height="60">
             <Button assist:ButtonProgressAssist.IndicatorBackground="Green" assist:ButtonProgressAssist.Maximum="100" assist:ButtonProgressAssist.Minimum="0" Style="{StaticResource ProcessButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Click="Button_Click_1">DownLoad</Button>
             <Grid Width="20"></Grid>
-            <Button Style="{StaticResource NormalButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" >Hello World!</Button>
+            <Button Style="{StaticResource NormalButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Click="Button_Click_2" >
+                <packIcons:PackIcon Spin="True" Flip="Vertical" SpinDuration="1" Rotation="180" x:Name="icon" State="Modern" Kind="Clock"></packIcons:PackIcon>
+            </Button>
         </StackPanel>
         
     </Grid>

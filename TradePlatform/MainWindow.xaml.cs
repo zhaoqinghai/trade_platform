@@ -68,5 +68,11 @@ namespace TradePlatform
             await Task.Delay(100);
             ButtonProgressAssist.SetValue(sender as DependencyObject, 0);
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            icon.State = Resource.Icons.PackIconState.Traditional;
+
+        }
     }
 }
