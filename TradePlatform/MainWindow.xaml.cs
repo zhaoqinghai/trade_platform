@@ -2,21 +2,12 @@
 using MahApps.Metro.Controls;
 using Resource;
 using Resource.Icons;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TradePlatform
 {
@@ -94,18 +85,33 @@ namespace TradePlatform
                 ThemeSelector.Default.SetCurrentTheme(false);
             }
         }
-
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            Downloading(sender);
+        }
+
+        Queue<CancellationTokenSource> queue = new Queue<CancellationTokenSource>();
+
+        async void Downloading(object sender)
+        {
+            if(queue.Count>0)
+                queue.Dequeue().Cancel();
+            CancellationTokenSource cts = new CancellationTokenSource();
+            queue.Enqueue(cts);
             var value = 0;
-            while (value < 100)
+            await Task.Delay(10);
+            await Task.Factory.StartNew(async () =>
             {
-                ButtonProgressAssist.SetValue(sender as DependencyObject, value);
-                await Task.Delay(30);
-                value++;
-            }
-            await Task.Delay(100);
-            ButtonProgressAssist.SetValue(sender as DependencyObject, 0);
+                while (!cts.IsCancellationRequested&&value<100)
+                {
+                    await Application.Current.Dispatcher.InvokeAsync(()=> { ButtonProgressAssist.SetValue(sender as DependencyObject, value); });
+                    await Task.Delay(30);
+                    value++;
+                }
+                await Task.Delay(100);
+                await Application.Current.Dispatcher.InvokeAsync(() => { ButtonProgressAssist.SetValue(sender as DependencyObject, 0); });
+            }, cts.Token);
+           
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
