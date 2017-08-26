@@ -12,8 +12,8 @@
         mc:Ignorable="d"
         Style="{StaticResource CommonWindowStyle}"
         Title="MainWindow" Height="500" Width="900">
-    <TabControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <TabItem DataContext="{x:Null}" Header="grid">
+    <TabControl Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <TabItem Background="Transparent" DataContext="{x:Null}" Header="grid">
             <Grid >
                 <TextBlock Foreground="{DynamicResource SnackbarBackground}" Text="Hello World" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
                 <ToggleButton Background="{DynamicResource PrimaryDarkBrush}" Foreground="{DynamicResource AccentDarkForegroundBrush}"  VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click" >
@@ -30,7 +30,7 @@
 
             </Grid>
         </TabItem>
-        <TabItem x:Name="EntypoTabItem" Header="Entypo">
+        <TabItem Background="Transparent" x:Name="EntypoTabItem" Header="Entypo">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding EntypoList}" >   
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -73,7 +73,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </TabItem>
-        <TabItem Header="Modern">
+        <TabItem Background="Transparent" Header="Modern">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding ModernList}" >   
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -114,7 +114,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </TabItem>
-        <TabItem Header="Awesome">
+        <TabItem Background="Transparent" Header="Awesome">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding AwesomeList}" >   
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -155,7 +155,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </TabItem>
-        <TabItem Header="Material">
+        <TabItem Background="Transparent" Header="Material">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding MaterialList}" >   
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -196,7 +196,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </TabItem>
-        <TabItem Header="Light">
+        <TabItem Background="Transparent" Header="Light">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding LightList}" >   
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -237,7 +237,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </TabItem>
-        <TabItem Header="Octicons">
+        <TabItem Background="Transparent" Header="Octicons">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding OcticonsList}" >   
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
