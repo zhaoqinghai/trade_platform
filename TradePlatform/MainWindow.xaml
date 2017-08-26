@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:packIcons="clr-namespace:Resource.Icons;assembly=Resource"
         ResizeMode="CanResizeWithGrip"
+        xmlns:UserControl="clr-namespace:ControlLib.Controls;assembly=ControlLib"
         xmlns:assist="clr-namespace:ControlLib.Assists;assembly=ControlLib"
         xmlns:local="clr-namespace:TradePlatform"
         mc:Ignorable="d"
@@ -31,17 +32,17 @@
         </TabItem>
         <TabItem x:Name="EntypoTabItem" Header="Entypo">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding EntypoList}" >   
-                <!--<ListBox.ItemsPanel>
+                <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel IsItemsHost="True"/>
+                        <UserControl:VirtualizingTilePanel ChildSize="40"  IsItemsHost="True"/>
                     </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>-->
+                </ListBox.ItemsPanel>
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
-                                    <Border Width="40" Height="40" Background="Transparent" >
+                                    <Border Background="Transparent" >
                                         <ContentPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></ContentPresenter>
                                     </Border>
                                 </ControlTemplate>                            
@@ -51,32 +52,34 @@
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border Height="40" Width="40" >
-                            <Grid Background="Transparent" ToolTip="{Binding Path=KindText}">
-                                <packIcons:PackIcon Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Flip="Vertical" State="Entypo" Kind="{Binding Path=DataPath}"></packIcons:PackIcon>
-                            </Grid>
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Setter Property="Background" Value="Purple"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="LightGreen"></Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                        </Border>
+                        <Grid x:Name="Root" Background="Transparent" Height="40" Width="40" >
+                            <Border >
+                                <Grid Background="Transparent" ToolTip="{Binding Path=KindText}">
+                                    <packIcons:PackIcon Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Flip="Vertical" State="Entypo" Kind="{Binding Path=DataPath}"></packIcons:PackIcon>
+                                </Grid>
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="Purple"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="LightGreen"></Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </TabItem>
         <TabItem Header="Modern">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding ModernList}" >   
-                <!--<ListBox.ItemsPanel>
+                <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel IsItemsHost="True"/>
+                        <UserControl:VirtualizingTilePanel ChildSize="40"  IsItemsHost="True"/>
                     </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>-->
+                </ListBox.ItemsPanel>
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
                         <Setter Property="Template">
@@ -113,11 +116,11 @@
         </TabItem>
         <TabItem Header="Awesome">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding AwesomeList}" >   
-                <!--<ListBox.ItemsPanel>
+                <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel IsItemsHost="True"/>
+                        <UserControl:VirtualizingTilePanel ChildSize="40"  IsItemsHost="True"/>
                     </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>-->
+                </ListBox.ItemsPanel>
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
                         <Setter Property="Template">
@@ -154,11 +157,11 @@
         </TabItem>
         <TabItem Header="Material">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding MaterialList}" >   
-                <!--<ListBox.ItemsPanel>
+                <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel IsItemsHost="True"/>
+                        <UserControl:VirtualizingTilePanel ChildSize="40"  IsItemsHost="True"/>
                     </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>-->
+                </ListBox.ItemsPanel>
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
                         <Setter Property="Template">
@@ -195,11 +198,11 @@
         </TabItem>
         <TabItem Header="Light">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding LightList}" >   
-                <!--<ListBox.ItemsPanel>
+                <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel IsItemsHost="True"/>
+                        <UserControl:VirtualizingTilePanel ChildSize="40"  IsItemsHost="True"/>
                     </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>-->
+                </ListBox.ItemsPanel>
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
                         <Setter Property="Template">
@@ -236,19 +239,19 @@
         </TabItem>
         <TabItem Header="Octicons">
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding OcticonsList}" >   
-                <!--<ListBox.ItemsPanel>
+                <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel IsItemsHost="True"/>
+                        <UserControl:VirtualizingTilePanel ChildSize="40"  IsItemsHost="True"/>
                     </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>-->
+                </ListBox.ItemsPanel>
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
-                                    <Border Width="40" Height="40" Background="Transparent" >
+                                    <Grid Width="40" Height="40" >
                                         <ContentPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></ContentPresenter>
-                                    </Border>
+                                    </Grid>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>

@@ -77,9 +77,10 @@ namespace Resource
                 if (path == null)
                     return null;
 
-                return (ResourceDictionary)Application.LoadComponent(new Uri(
-                    $"/{assemblyName};component/{path.Replace(".baml", ".xaml")}",
-                    UriKind.RelativeOrAbsolute));
+                return new ResourceDictionary() { Source = new Uri($"pack://application:,,,/{assemblyName};component/{path.Replace(".baml", ".xaml")}") };
+                //(ResourceDictionary)Application.LoadComponent(new Uri(
+                //    $"/{assemblyName};component/{path.Replace(".baml", ".xaml")}",
+                //    UriKind.RelativeOrAbsolute));
             }
 
         }

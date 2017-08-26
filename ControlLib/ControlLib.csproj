@@ -66,7 +66,7 @@
     <Compile Include="Assists\RippleAssist.cs" />
     <Compile Include="Assists\ShadowAssist.cs" />
     <Compile Include="Controls\Ripple.cs" />
-    <Compile Include="Controls\VirtualizingWrapPanel.cs" />
+    <Compile Include="Controls\VirtualizingTilePanel.cs" />
     <Compile Include="Converters\MathConverter.cs" />
     <Compile Include="Converters\RangeLengthConverter.cs" />
     <Compile Include="Converters\ShadowConverter.cs" />

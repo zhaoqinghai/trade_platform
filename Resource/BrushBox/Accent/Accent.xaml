@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="AccentLightBrush" />
-    <SolidColorBrush x:Key="AccentLightForegroundBrush"  />
-    <SolidColorBrush x:Key="AccentMidBrush"  />
-    <SolidColorBrush x:Key="AccentMidForegroundBrush" />
-    <SolidColorBrush x:Key="AccentDarkBrush" />
-    <SolidColorBrush x:Key="AccentDarkForegroundBrush" />
+    <SolidColorBrush x:Key="AccentLightBrush" Color="{StaticResource Accent100}"/>
+    <SolidColorBrush x:Key="AccentLightForegroundBrush" Color="{StaticResource Accent100Foreground}" />
+    <SolidColorBrush x:Key="AccentMidBrush" Color="{StaticResource Accent400}" />
+    <SolidColorBrush x:Key="AccentMidForegroundBrush" Color="{StaticResource Accent400Foreground}" />
+    <SolidColorBrush x:Key="AccentDarkBrush" Color="{StaticResource Accent700}"/>
+    <SolidColorBrush x:Key="AccentDarkForegroundBrush" Color="{StaticResource Accent700Foreground}"/>
 </ResourceDictionary>
